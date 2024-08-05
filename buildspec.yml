@@ -1,0 +1,18 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: 3.12
+  build:
+    commands:
+      # - pip install --upgrade awscli
+      # - pip install pymysql -t .
+      # - python -m unittest discover tests
+      - export BUCKET=devopsbot-dev
+      - >-
+        aws cloudformation package --template-file template.yml --s3-bucket
+        $BUCKET --output-template-file outputtemplate.yml
+artifacts:
+  files:
+    - template.yml
+    - outputtemplate.yml

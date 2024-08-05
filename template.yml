@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: "AWS::Serverless-2016-10-31"
+Description: CloudBot Bootstrap Lambda Layer
+Resources:
+  layername:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      CompatibleArchitectures:
+        - x86_64
+      CompatibleRuntimes:
+        - python3.12
+      ContentUri: ./
+      LayerName: layer-name
+      LicenseInfo: String
+  layernamelatest:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /CloudBot/Layers/NameLatest
+      Value:
+        Fn::GetAtt:
+          - "layername"
+          - "LayerVersionArn"
+      Type: String
+      Description: "CloudBot Layers Name Latest Version ARN"
