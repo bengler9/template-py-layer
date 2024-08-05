@@ -21,7 +21,7 @@ try:
     )
 except ClientError as e:
     if e.response['Error']['Code']:
-        print("ERROR: Unexpected error: Could not get secret.")
+        print("ERROR: Unexpected error: Could not get secret. ")
         print("More Error Info: " + str(e))
         raise e
 else:
