@@ -10,12 +10,12 @@ Resources:
       CompatibleRuntimes:
         - python3.12
       ContentUri: ./
-      LayerName: layer-name
+      LayerName: !Ref "AWS::StackName"
       LicenseInfo: String
   layernamelatest:
     Type: AWS::SSM::Parameter
     Properties:
-      Name: /CloudBot/Layers/NameLatest
+      Name: !Sub '/CloudBot/Layers/${AWS::StackName}-latest'
       Value:
         Fn::GetAtt:
           - "layername"
