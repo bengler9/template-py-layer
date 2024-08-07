@@ -24,11 +24,7 @@ Resources:
               - 0
               - !Split
                 - '-'
-                - !Sub
-                  - '${Length}-1'
-                  - Length: !Len
-                      - !Split ['-', !Ref 'AWS::StackName']
-                - !Split ['-', !Ref 'AWS::StackName']
+                - !Ref 'AWS::StackName'
           - '-latest'
       Value:
         Fn::GetAtt:
