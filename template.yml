@@ -17,15 +17,9 @@ Resources:
     Properties:
       Name: !Join
         - ''
-        - - '/CloudBot/Layers/'
-          - !Join
-            - '-'
-            - - !Select
-                - 0
-                - !Split
-                  - '-'
-                  - !Ref 'AWS::StackName'
-              - 'latest'
+        - - !Select [0, !Split ['-stack', !Ref 'AWS::StackName']]
+          - !Select [1, !Split ['-stack', !Ref 'AWS::StackName']]
+          - "-latest"
       Value:
         Fn::GetAtt:
           - "layername"
