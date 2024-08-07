@@ -10,8 +10,10 @@ Resources:
       CompatibleRuntimes:
         - python3.12
       ContentUri: ./
-      LayerName: !Ref "AWS::StackName"
-      LicenseInfo: String
+      LayerName: !Join
+        - ''
+        - - !Select [0, !Split ['-stack', !Ref 'AWS::StackName']]
+          - !Select [1, !Split ['-stack', !Ref 'AWS::StackName']]
   layernamelatest:
     Type: AWS::SSM::Parameter
     Properties:
