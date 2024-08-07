@@ -24,7 +24,7 @@ Resources:
               - 0
               - !Sub
                 - '${Length}-1'
-                - Length: !Len !Split ['-', !Ref 'AWS::StackName']
+                - Length: !Len (!Split ['-', !Ref 'AWS::StackName'])
               - !Split ['-', !Ref 'AWS::StackName']
           - '-latest'
       Value:
