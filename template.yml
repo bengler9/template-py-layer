@@ -20,12 +20,12 @@ Resources:
         - - '/CloudBot/Layers/'
           - !Join
             - '-'
-            - !Select
-              - 0
-              - !Split
-                - '-'
-                - !Ref 'AWS::StackName'
-          - '-latest'
+            - - !Select
+                - 0
+                - !Split
+                  - '-'
+                  - !Ref 'AWS::StackName'
+              - 'latest'
       Value:
         Fn::GetAtt:
           - "layername"
