@@ -15,11 +15,18 @@ Resources:
   layernamelatest:
     Type: AWS::SSM::Parameter
     Properties:
-      Name: !Sub '/CloudBot/Layers/${AWS::StackName.Split("-")[0]}-latest'
       Name: !Join
         - ''
         - - '/CloudBot/Layers/'
-          - !Select [0, !Split ['-', !Ref 'AWS::StackName']]
+          - !Join
+            - '-'
+            - !Slice
+              - 0
+              - !Sub
+                - '${Length}-1'
+                - Length: !Len
+                    !Split ['-', !Ref 'AWS::StackName']
+              - !Split ['-', !Ref 'AWS::StackName']
           - '-latest'
       Value:
         Fn::GetAtt:
