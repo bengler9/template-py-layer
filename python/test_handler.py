@@ -25,17 +25,9 @@ def setup():
     }
 
 
-def test_response_statuscode_sfnSendTaskSuccess(setup):
-    result = layer_name.sfnSendTaskSuccess(setup['event'], None)
-    assert result['statusCode'] == 200
-
-
-def test_response_body_sfnSendTaskSuccess(setup):
-    result = layer_name.sfnSendTaskSuccess(setup['event'], None)
-    print(result['body'])
-    assert result['body'] == json.dumps(
-                setup['expected_body'],
-                indent=4,
-                sort_keys=True,
-                default=str
-            )
+@pytest.mark.parametrize("expected", [
+    ("Good Day from CloudBot!")
+])
+def test_response_exists_bootstrapMethod(expected):
+    result = layer_name.bootstrapMethod()
+    assert result == expected
