@@ -1,6 +1,11 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: "AWS::Serverless-2016-10-31"
 Description: CloudBot Bootstrap Lambda Layer
+Parameters:
+  ARTIFACTSBUCKET:
+    Type: String
+  S3Key:
+    Type: String
 Resources:
   layername:
     Type: AWS::Serverless::LayerVersion
@@ -9,7 +14,9 @@ Resources:
         - x86_64
       CompatibleRuntimes:
         - python3.12
-      ContentUri: ./
+      ContentUri:
+        Bucket: !Ref ARTIFACTSBUCKET
+        Key: !Ref S3Key
       LayerName: !Join
         - ''
         - - !Select [0, !Split ['-stack', !Ref 'AWS::StackName']]
